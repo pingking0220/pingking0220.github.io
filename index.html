@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>力行國小行政服務</title>
+<meta name="description" content="力行國小行政服務入口：場地預約、頒獎典禮座位預約">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<script>
+  /* 從 LINE 開啟時自動改用手機預設瀏覽器（LINE 內建瀏覽器無法登入 Google） */
+  if (/\bLine\//i.test(navigator.userAgent) && !/[?&]openExternalBrowser=1/.test(location.search)) {
+    location.replace(location.href.split('#')[0] + (location.search ? '&' : '?') + 'openExternalBrowser=1');
+  }
+</script>
+<style>
+:root{--bg:#F7F6F3;--panel:#FFFFFF;--ink:#2B2B28;--muted:#6F6D66;--line:#E3E1DA;--sel:#378ADD;
+  --a-bg:#E1F5EE;--a-tx:#085041;--b-bg:#EEEDFE;--b-tx:#3C3489}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans TC',system-ui,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;display:flex;flex-direction:column}
+.hero{background:linear-gradient(135deg,#EEEDFE 0%,#E1F5EE 100%);padding:44px 20px 88px;text-align:center}
+.hero h1{font-size:30px;font-weight:700;letter-spacing:.06em}
+.hero p{margin-top:10px;color:var(--muted);font-size:15.5px;line-height:1.8}
+.hero p b{color:var(--ink);font-weight:500}
+main{flex:1;max-width:920px;width:100%;margin:-56px auto 0;padding:0 16px 40px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px 24px 22px;box-shadow:0 8px 28px rgba(43,43,40,.08);display:flex;flex-direction:column;transition:transform .15s,box-shadow .15s}
+.card:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(43,43,40,.12)}
+.icon{width:58px;height:58px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:14px}
+.card h2{font-size:21px;font-weight:700;margin-bottom:6px}
+.card .desc{color:var(--muted);font-size:14.5px;line-height:1.8;flex:1}
+.card ul{margin:10px 0 18px 1.2em;color:var(--ink);font-size:14px;line-height:1.9}
+.acts{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.go{flex:1;text-align:center;text-decoration:none;font-size:16px;font-weight:500;padding:12px 18px;border-radius:11px;color:#fff;min-width:150px}
+.go:hover{filter:brightness(1.06)}
+.help{text-decoration:none;font-size:14px;color:var(--muted);padding:10px 12px;border-radius:10px;border:1px solid var(--line)}
+.help:hover{background:var(--bg);color:var(--ink)}
+.c-venue .icon{background:var(--a-bg)} .c-venue .go{background:#1D7A5A}
+.c-award .icon{background:var(--b-bg)} .c-award .go{background:#4B43A8}
+.note{margin-top:26px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 20px;font-size:14px;color:var(--muted);line-height:1.9}
+.note b{color:var(--ink);font-weight:500}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:18px 16px 26px}
+footer a{color:var(--muted)}
+@media (max-width:560px){.hero{padding:34px 16px 80px}.hero h1{font-size:24px}.card{padding:22px 18px 18px}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <h1>🏫 力行國小行政服務</h1>
+  <p>請選擇要使用的系統<br>登入請用學校 Google 帳號 <b>@lsps.tp.edu.tw</b>，兩個系統共用同一個帳號</p>
+</header>
+
+<main>
+  <div class="cards">
+    <section class="card c-venue">
+      <div class="icon">🏫</div>
+      <h2>場地預約</h2>
+      <p class="desc">借視聽教室、電腦教室、會議室等校內場地。</p>
+      <ul>
+        <li>一張表看全部場地與每一節</li>
+        <li>點空格就借，免填申請人</li>
+        <li>固定課程可每週重複到學期末</li>
+      </ul>
+      <div class="acts">
+        <a class="go" href="https://pingking0220.github.io/venue-booking/">進入場地預約 →</a>
+        <a class="help" href="https://pingking0220.github.io/venue-booking/guide.html">使用說明</a>
+      </div>
+    </section>
+
+    <section class="card c-award">
+      <div class="icon">🏆</div>
+      <h2>頒獎典禮座位預約</h2>
+      <p class="desc">各處室為頒獎典禮預約視聽教室座位、登記得獎者。</p>
+      <ul>
+        <li>依處室分色，拖曳選位</li>
+        <li>Excel 匯入名單、列印通知單</li>
+        <li>總覽模式可投影看全場</li>
+      </ul>
+      <div class="acts">
+        <a class="go" href="https://pingking0220.github.io/award-seating/">進入座位預約 →</a>
+        <a class="help" href="https://pingking0220.github.io/award-seating/guide.html">使用說明</a>
+      </div>
+    </section>
+  </div>
+
+  <div class="note">
+    💡 <b>小提醒</b>：請用 Chrome、Edge 或 Safari 開啟；從 LINE、Facebook 裡直接點連結會無法登入。<br>
+    建議把這一頁加入書籤或手機主畫面，以後從這裡進入各系統。
+  </div>
+</main>
+
+<footer>系統問題請洽資訊組　<a href="mailto:it@lsps.tp.edu.tw">it@lsps.tp.edu.tw</a></footer>
+</body>
+</html>
