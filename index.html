@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>力行國小行政服務</title>
-<meta name="description" content="力行國小行政服務入口：場地預約、頒獎典禮座位預約">
+<meta name="description" content="力行國小行政服務入口：場地預約、頒獎典禮座位預約、課表查詢">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 <script>
@@ -22,14 +22,14 @@ body{font-family:'Noto Sans TC',system-ui,sans-serif;background:var(--bg);color:
 .hero h1{font-size:30px;font-weight:700;letter-spacing:.06em}
 .hero p{margin-top:10px;color:var(--muted);font-size:15.5px;line-height:1.8}
 .hero p b{color:var(--ink);font-weight:500}
-main{flex:1;max-width:920px;width:100%;margin:-56px auto 0;padding:0 16px 40px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+main{flex:1;max-width:1000px;width:100%;margin:-56px auto 0;padding:0 16px 40px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px 24px 22px;box-shadow:0 8px 28px rgba(43,43,40,.08);display:flex;flex-direction:column;transition:transform .15s,box-shadow .15s}
 .card:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(43,43,40,.12)}
 .icon{width:58px;height:58px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:14px}
 .card h2{font-size:21px;font-weight:700;margin-bottom:6px}
-.card .desc{color:var(--muted);font-size:14.5px;line-height:1.8;flex:1}
-.card ul{margin:10px 0 18px 1.2em;color:var(--ink);font-size:14px;line-height:1.9}
+.card .desc{color:var(--muted);font-size:14.5px;line-height:1.8}
+.card ul{margin:10px 0 18px 1.2em;color:var(--ink);font-size:14px;line-height:1.9;flex:1}
 .acts{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .go{flex:1;text-align:center;text-decoration:none;font-size:16px;font-weight:500;padding:12px 18px;border-radius:11px;color:#fff;min-width:150px}
 .go:hover{filter:brightness(1.06)}
@@ -37,6 +37,9 @@ main{flex:1;max-width:920px;width:100%;margin:-56px auto 0;padding:0 16px 40px}
 .help:hover{background:var(--bg);color:var(--ink)}
 .c-venue .icon{background:var(--a-bg)} .c-venue .go{background:#1D7A5A}
 .c-award .icon{background:var(--b-bg)} .c-award .go{background:#4B43A8}
+.c-tt .icon{background:#FAEEDA} .c-tt .go{background:#A35F00}
+.login{font-size:13px;color:var(--muted);margin:-8px 0 14px;padding-top:10px;border-top:1px dashed var(--line)}
+.login b{color:var(--ink);font-weight:500}
 .note{margin-top:26px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 20px;font-size:14px;color:var(--muted);line-height:1.9}
 .note b{color:var(--ink);font-weight:500}
 footer{text-align:center;color:var(--muted);font-size:13px;padding:18px 16px 26px}
@@ -47,7 +50,7 @@ footer a{color:var(--muted)}
 <body>
 <header class="hero">
   <h1>🏫 力行國小行政服務</h1>
-  <p>請選擇要使用的系統<br>登入請用學校 Google 帳號 <b>@lsps.tp.edu.tw</b>，兩個系統共用同一個帳號</p>
+  <p>請選擇要使用的系統</p>
 </header>
 
 <main>
@@ -61,6 +64,7 @@ footer a{color:var(--muted)}
         <li>點空格就借，免填申請人</li>
         <li>固定課程可每週重複到學期末</li>
       </ul>
+      <p class="login">登入：學校 Google 帳號 <b>@lsps.tp.edu.tw</b></p>
       <div class="acts">
         <a class="go" href="https://pingking0220.github.io/venue-booking/">進入場地預約 →</a>
         <a class="help" href="https://pingking0220.github.io/venue-booking/guide.html">使用說明</a>
@@ -76,15 +80,32 @@ footer a{color:var(--muted)}
         <li>Excel 匯入名單、列印通知單</li>
         <li>總覽模式可投影看全場</li>
       </ul>
+      <p class="login">登入：學校 Google 帳號 <b>@lsps.tp.edu.tw</b></p>
       <div class="acts">
         <a class="go" href="https://pingking0220.github.io/award-seating/">進入座位預約 →</a>
         <a class="help" href="https://pingking0220.github.io/award-seating/guide.html">使用說明</a>
+      </div>
+    </section>
+
+    <section class="card c-tt">
+      <div class="icon">📅</div>
+      <h2>課表查詢</h2>
+      <p class="desc">查詢全校班級課表；教學組、導師排課用。</p>
+      <ul>
+        <li>不用登入就能查全校課表</li>
+        <li>導師可排自己班、自己任教的節次</li>
+        <li>多人同時編輯，幾秒內同步</li>
+      </ul>
+      <p class="login">登入：校園帳號（和登入學校電腦同一組）</p>
+      <div class="acts">
+        <a class="go" href="https://schedule.class.synology.me/">進入課表系統 →</a>
       </div>
     </section>
   </div>
 
   <div class="note">
     💡 <b>小提醒</b>：請用 Chrome、Edge 或 Safari 開啟；從 LINE、Facebook 裡直接點連結會無法登入。<br>
+    「場地預約」和「頒獎典禮座位預約」用同一個學校 Google 帳號；「課表查詢」用校園帳號（和登入學校電腦同一組）。<br>
     建議把這一頁加入書籤或手機主畫面，以後從這裡進入各系統。
   </div>
 </main>
