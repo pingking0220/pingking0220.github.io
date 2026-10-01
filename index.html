@@ -6,7 +6,7 @@
 <title>力行國小行政服務</title>
 <meta name="description" content="力行國小行政服務入口：場地預約、頒獎典禮座位預約、課表查詢">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script>
   /* 從 LINE 開啟時自動改用手機預設瀏覽器（LINE 內建瀏覽器無法登入 Google） */
   if (/\bLine\//i.test(navigator.userAgent) && !/[?&]openExternalBrowser=1/.test(location.search)) {
@@ -14,102 +14,224 @@
   }
 </script>
 <style>
-:root{--bg:#F7F6F3;--panel:#FFFFFF;--ink:#2B2B28;--muted:#6F6D66;--line:#E3E1DA;--sel:#378ADD;
-  --a-bg:#E1F5EE;--a-tx:#085041;--b-bg:#EEEDFE;--b-tx:#3C3489}
+:root{--ink:#2B2B3A;--muted:#6B6E85;--soft:#8A8DA3}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Noto Sans TC',system-ui,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;display:flex;flex-direction:column}
-.hero{background:linear-gradient(135deg,#EEEDFE 0%,#E1F5EE 100%);padding:44px 20px 88px;text-align:center}
-.hero h1{font-size:30px;font-weight:700;letter-spacing:.06em}
-.hero p{margin-top:10px;color:var(--muted);font-size:15.5px;line-height:1.8}
-.hero p b{color:var(--ink);font-weight:500}
-main{flex:1;max-width:1000px;width:100%;margin:-56px auto 0;padding:0 16px 40px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px 24px 22px;box-shadow:0 8px 28px rgba(43,43,40,.08);display:flex;flex-direction:column;transition:transform .15s,box-shadow .15s}
-.card:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(43,43,40,.12)}
-.icon{width:58px;height:58px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:14px}
-.card h2{font-size:21px;font-weight:700;margin-bottom:6px}
-.card .desc{color:var(--muted);font-size:14.5px;line-height:1.8}
-.card ul{margin:10px 0 18px 1.2em;color:var(--ink);font-size:14px;line-height:1.9;flex:1}
-.acts{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.go{flex:1;text-align:center;text-decoration:none;font-size:16px;font-weight:500;padding:12px 18px;border-radius:11px;color:#fff;min-width:150px}
-.go:hover{filter:brightness(1.06)}
-.help{text-decoration:none;font-size:14px;color:var(--muted);padding:10px 12px;border-radius:10px;border:1px solid var(--line)}
-.help:hover{background:var(--bg);color:var(--ink)}
-.c-venue .icon{background:var(--a-bg)} .c-venue .go{background:#1D7A5A}
-.c-award .icon{background:var(--b-bg)} .c-award .go{background:#4B43A8}
-.c-tt .icon{background:#FAEEDA} .c-tt .go{background:#A35F00}
-.login{font-size:13px;color:var(--muted);margin:-8px 0 14px;padding-top:10px;border-top:1px dashed var(--line)}
-.login b{color:var(--ink);font-weight:500}
-.note{margin-top:26px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 20px;font-size:14px;color:var(--muted);line-height:1.9}
-.note b{color:var(--ink);font-weight:500}
-footer{text-align:center;color:var(--muted);font-size:13px;padding:18px 16px 26px}
-footer a{color:var(--muted)}
-@media (max-width:560px){.hero{padding:34px 16px 80px}.hero h1{font-size:24px}.card{padding:22px 18px 18px}}
+body{font-family:'Noto Sans TC',system-ui,"PingFang TC","Microsoft JhengHei",sans-serif;color:var(--ink);min-height:100vh;background:#F5F3FF}
+/* 背景漸層放在固定層：手機上 background-attachment:fixed 不可靠 */
+body::before{content:"";position:fixed;inset:0;z-index:-1;
+  background:radial-gradient(circle at 12% 18%,#FFE7F1 0,transparent 32%),radial-gradient(circle at 88% 14%,#E3F4FF 0,transparent 34%),
+  radial-gradient(circle at 80% 88%,#FFF1D6 0,transparent 36%),radial-gradient(circle at 10% 85%,#E7FBEF 0,transparent 34%),
+  linear-gradient(160deg,#F2F5FF,#F7F0FF 55%,#FFF7EE)}
+
+/* 背景飄浮的小東西 */
+.bg{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.bg svg{position:absolute;animation:float 7s ease-in-out infinite}
+
+.wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:34px 18px 28px}
+
+/* 招呼區 */
+.hero{text-align:center;margin-bottom:26px;animation:rise .6s cubic-bezier(.2,.9,.3,1.2) both}
+.mascot{width:132px;height:124px;margin:0 auto 4px;filter:drop-shadow(0 10px 14px rgba(91,108,255,.18));animation:bob 3.2s ease-in-out infinite}
+.mascot svg{width:100%;height:100%;overflow:visible}
+.wave{transform-box:fill-box;transform-origin:30% 90%;animation:wave 1.8s ease-in-out infinite}
+.eyes{transform-box:fill-box;transform-origin:center;animation:blink 4.5s infinite}
+.hero h1{font-size:34px;font-weight:900;letter-spacing:.06em;line-height:1.3}
+.hero h1 b{background:linear-gradient(90deg,#5B6CFF,#B05BFF 60%,#FF6FA0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{margin-top:6px;font-size:16.5px;color:var(--muted)}
+
+/* 系統卡片 */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(285px,1fr));gap:20px}
+.card{position:relative;display:flex;flex-direction:column;background:rgba(255,255,255,.78);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.95);border-radius:28px;padding:22px 22px 20px;
+  box-shadow:0 20px 56px rgba(91,108,255,.13),0 3px 12px rgba(43,43,58,.05);
+  transition:transform .25s cubic-bezier(.3,1.4,.5,1),box-shadow .25s;animation:rise .6s cubic-bezier(.2,.9,.3,1.2) both}
+.card:nth-child(2){animation-delay:.08s}.card:nth-child(3){animation-delay:.16s}
+.card:hover{transform:translateY(-6px);box-shadow:0 28px 70px rgba(91,108,255,.2),0 4px 14px rgba(43,43,58,.06)}
+.top{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.pal{width:76px;height:76px;border-radius:24px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pal svg{width:64px;height:64px;overflow:visible}
+.card:hover .pal svg{animation:wiggle .6s ease-in-out}
+.card h2{font-size:21px;font-weight:900;letter-spacing:.03em;line-height:1.35}
+.tag{display:inline-block;margin-top:4px;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px}
+.desc{font-size:14.5px;color:var(--muted);line-height:1.75;margin-bottom:10px}
+.feat{list-style:none;flex:1;margin-bottom:14px}
+.feat li{position:relative;padding-left:28px;font-size:14.5px;line-height:1.7;margin-bottom:5px}
+.feat li::before{content:"✓";position:absolute;left:0;top:2px;width:20px;height:20px;border-radius:50%;font-size:12px;font-weight:900;
+  display:flex;align-items:center;justify-content:center;color:#fff;background:var(--c)}
+.acts{display:flex;gap:10px;align-items:stretch}
+.go{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;color:#fff;font-weight:900;font-size:16.5px;letter-spacing:.06em;
+  height:52px;border-radius:17px;background:var(--g);background-size:160% 100%;box-shadow:0 10px 22px var(--sh);transition:transform .15s,box-shadow .15s,background-position .4s}
+.go:hover{transform:translateY(-2px);background-position:100% 0}
+.go:active{transform:scale(.98)}
+.go span{transition:transform .2s}.go:hover span{transform:translateX(4px)}
+.help{display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--muted);font-size:14px;font-weight:500;
+  padding:0 14px;border-radius:17px;background:#F4F6FC;border:2px solid transparent;transition:border-color .2s,background .2s}
+.help:hover{background:#fff;border-color:#C9D0FF;color:var(--ink)}
+
+/* 三種配色 */
+.c1{--c:#2FB38F;--g:linear-gradient(135deg,#1FA383,#45C4A0 55%,#7ED7C1);--sh:rgba(31,163,131,.3)}
+.c1 .pal{background:#E2F8F0}.c1 .tag{background:#E2F8F0;color:#147A5F}
+.c2{--c:#7A62FF;--g:linear-gradient(135deg,#5B6CFF,#8A5BFF 55%,#B05BFF);--sh:rgba(108,91,255,.32)}
+.c2 .pal{background:#EEEBFF}.c2 .tag{background:#EEEBFF;color:#4B3BC4}
+.c3{--c:#FF8A4C;--g:linear-gradient(135deg,#FF8A4C,#FF6F8E 60%,#FF6FA0);--sh:rgba(255,111,142,.3)}
+.c3 .pal{background:#FFEEE3}.c3 .tag{background:#FFEEE3;color:#B44A10}
+
+/* 小提醒 */
+.tips{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.7);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.95);border-radius:20px;padding:14px 16px;font-size:14px;color:var(--muted);line-height:1.7}
+.tip b{color:var(--ink)}
+.tip .e{font-size:24px;line-height:1}
+footer{position:relative;z-index:1;text-align:center;color:var(--soft);font-size:13px;padding:6px 16px 30px;letter-spacing:.04em}
+footer a{color:var(--soft)}
+
+@keyframes rise{from{opacity:0;transform:translateY(22px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes float{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-16px) rotate(calc(var(--r,0deg) + 8deg))}}
+@keyframes blink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.08)}}
+@keyframes wave{0%,100%{transform:rotate(0)}25%{transform:rotate(-22deg)}50%{transform:rotate(6deg)}75%{transform:rotate(-16deg)}}
+@keyframes wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg) scale(1.05)}50%{transform:rotate(7deg)}75%{transform:rotate(-4deg)}}
+@media (max-width:560px){.wrap{padding-top:24px}.hero h1{font-size:27px}.hero p{font-size:15px}.bg .far{display:none}.card{padding:20px 18px 18px}}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
 </style>
 </head>
 <body>
-<header class="hero">
-  <h1>🏫 力行國小行政服務</h1>
-  <p>請選擇要使用的系統</p>
-</header>
 
-<main>
-  <div class="cards">
-    <section class="card c-venue">
-      <div class="icon">🏫</div>
-      <h2>場地預約</h2>
+<div class="bg" aria-hidden="true">
+  <svg class="far" style="left:5%;top:9%;width:120px;animation-delay:-1s" viewBox="0 0 110 60"><path d="M28 50h56a18 18 0 0 0 0-36 26 26 0 0 0-49-6A21 21 0 0 0 28 50z" fill="#fff" opacity=".9"/></svg>
+  <svg class="far" style="right:6%;top:16%;width:86px;animation-delay:-3s" viewBox="0 0 110 60"><path d="M28 50h56a18 18 0 0 0 0-36 26 26 0 0 0-49-6A21 21 0 0 0 28 50z" fill="#fff" opacity=".85"/></svg>
+  <svg style="left:20%;top:30%;width:30px;--r:-10deg;animation-delay:-2s" viewBox="0 0 24 24"><path d="M12 1.5l3.1 6.6 7.2.9-5.3 5 1.4 7.1L12 17.6 5.6 21.1 7 14l-5.3-5 7.2-.9z" fill="#FFD66B"/></svg>
+  <svg style="right:22%;top:6%;width:22px;--r:12deg;animation-delay:-4s" viewBox="0 0 24 24"><path d="M12 1.5l3.1 6.6 7.2.9-5.3 5 1.4 7.1L12 17.6 5.6 21.1 7 14l-5.3-5 7.2-.9z" fill="#FF8FA3"/></svg>
+  <svg class="far" style="left:3%;top:55%;width:24px;animation-delay:-5s" viewBox="0 0 24 24"><path d="M12 1.5l3.1 6.6 7.2.9-5.3 5 1.4 7.1L12 17.6 5.6 21.1 7 14l-5.3-5 7.2-.9z" fill="#9BB5FF"/></svg>
+  <svg class="far" style="left:6%;bottom:8%;width:130px;--r:-28deg;animation-delay:-1.5s" viewBox="0 0 120 24"><rect x="10" y="6" width="84" height="12" rx="2" fill="#FFB38A"/><rect x="10" y="6" width="14" height="12" fill="#FF8FA3"/><path d="M94 6l18 6-18 6z" fill="#F7E1C2"/><path d="M106 10l6 2-6 2z" fill="#2B2B3A"/></svg>
+  <svg class="far" style="right:5%;bottom:12%;width:64px;--r:10deg;animation-delay:-2.5s" viewBox="0 0 64 64"><rect x="4" y="4" width="56" height="56" rx="12" fill="#9BB5FF"/><text x="32" y="44" text-anchor="middle" font-size="32" font-weight="800" fill="#fff" font-family="system-ui">A</text></svg>
+  <svg class="far" style="left:46%;bottom:4%;width:44px;--r:-8deg;animation-delay:-3.5s" viewBox="0 0 64 64"><rect x="4" y="4" width="56" height="56" rx="12" fill="#7ED7C1"/><text x="32" y="44" text-anchor="middle" font-size="30" font-weight="800" fill="#fff" font-family="system-ui">1</text></svg>
+  <svg class="far" style="right:30%;top:22%;width:50px;--r:-14deg;animation-delay:-4.5s" viewBox="0 0 48 48"><path d="M3 22L45 4 33 44 23 30z" fill="#fff" stroke="#C9A7FF" stroke-width="2.5" stroke-linejoin="round"/><path d="M23 30L45 4" stroke="#C9A7FF" stroke-width="2.5"/></svg>
+</div>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="mascot" aria-hidden="true">
+      <svg viewBox="0 0 160 150">
+        <ellipse cx="80" cy="142" rx="44" ry="6" fill="#5B6CFF" opacity=".12"/>
+        <rect x="28" y="30" width="104" height="104" rx="26" fill="#FFD66B"/>
+        <rect x="28" y="30" width="104" height="34" rx="26" fill="#FF8F7A"/>
+        <rect x="28" y="48" width="104" height="16" fill="#FF8F7A"/>
+        <rect x="50" y="18" width="11" height="26" rx="5.5" fill="#5B6CFF"/>
+        <rect x="99" y="18" width="11" height="26" rx="5.5" fill="#5B6CFF"/>
+        <g class="eyes">
+          <circle cx="62" cy="84" r="13" fill="#fff"/><circle cx="98" cy="84" r="13" fill="#fff"/>
+          <circle cx="63" cy="86" r="6.5" fill="#2B2B3A"/><circle cx="99" cy="86" r="6.5" fill="#2B2B3A"/>
+          <circle cx="65.5" cy="83.5" r="2" fill="#fff"/><circle cx="101.5" cy="83.5" r="2" fill="#fff"/>
+        </g>
+        <ellipse cx="47" cy="101" rx="7" ry="4.5" fill="#FF8FA3" opacity=".75"/><ellipse cx="113" cy="101" rx="7" ry="4.5" fill="#FF8FA3" opacity=".75"/>
+        <path d="M69 100 Q80 116 91 100 Z" fill="#2B2B3A"/>
+        <rect x="44" y="116" width="15" height="9" rx="3" fill="#7ED7C1"/><rect x="63" y="116" width="15" height="9" rx="3" fill="#9BB5FF"/>
+        <rect x="82" y="116" width="15" height="9" rx="3" fill="#FFB38A"/><rect x="101" y="116" width="15" height="9" rx="3" fill="#C9A7FF"/>
+        <ellipse cx="26" cy="108" rx="13" ry="10" fill="#FFC94A" stroke="#F2B12E" stroke-width="2"/>
+        <ellipse class="wave" cx="140" cy="62" rx="12" ry="14" fill="#FFC94A" stroke="#F2B12E" stroke-width="2"/>
+      </svg>
+    </div>
+    <h1>力行國小 <b>行政服務</b></h1>
+    <p>老師好！👋 今天要用哪一個系統呢？</p>
+  </header>
+
+  <main class="cards">
+    <section class="card c1">
+      <div class="top">
+        <div class="pal" aria-hidden="true">
+          <svg viewBox="0 0 80 80">
+            <path d="M40 4v14" stroke="#5BB8A2" stroke-width="2.5" stroke-linecap="round"/><path d="M41 5h14l-4 4 4 4H41z" fill="#FF8FA3"/>
+            <path d="M8 34L40 14l32 20z" fill="#FF8F7A"/>
+            <rect x="13" y="32" width="54" height="42" rx="9" fill="#7ED7C1"/>
+            <circle cx="31" cy="46" r="5.5" fill="#fff"/><circle cx="49" cy="46" r="5.5" fill="#fff"/>
+            <circle cx="31.5" cy="47" r="2.8" fill="#2B2B3A"/><circle cx="49.5" cy="47" r="2.8" fill="#2B2B3A"/>
+            <ellipse cx="23" cy="54" rx="4" ry="2.5" fill="#FF8FA3" opacity=".7"/><ellipse cx="57" cy="54" rx="4" ry="2.5" fill="#FF8FA3" opacity=".7"/>
+            <path d="M35 54 Q40 59 45 54" fill="none" stroke="#2B2B3A" stroke-width="2.4" stroke-linecap="round"/>
+            <rect x="34" y="61" width="12" height="13" rx="3" fill="#4FA98F"/>
+          </svg>
+        </div>
+        <div><h2>場地預約</h2><span class="tag">🔑 學校 Google 帳號</span></div>
+      </div>
       <p class="desc">借視聽教室、電腦教室、會議室等校內場地。</p>
-      <ul>
+      <ul class="feat">
         <li>一張表看全部場地與每一節</li>
         <li>點空格就借，免填申請人</li>
         <li>固定課程可每週重複到學期末</li>
       </ul>
-      <p class="login">登入：學校 Google 帳號 <b>@lsps.tp.edu.tw</b></p>
       <div class="acts">
-        <a class="go" href="https://pingking0220.github.io/venue-booking/">進入場地預約 →</a>
+        <a class="go" href="https://pingking0220.github.io/venue-booking/">進入場地預約 <span>→</span></a>
         <a class="help" href="https://pingking0220.github.io/venue-booking/guide.html">使用說明</a>
       </div>
     </section>
 
-    <section class="card c-award">
-      <div class="icon">🏆</div>
-      <h2>頒獎典禮座位預約</h2>
+    <section class="card c2">
+      <div class="top">
+        <div class="pal" aria-hidden="true">
+          <svg viewBox="0 0 80 80">
+            <path d="M22 18c-11 0-11 16 2 18M58 18c11 0 11 16-2 18" fill="none" stroke="#F2B12E" stroke-width="4" stroke-linecap="round"/>
+            <path d="M20 12h40v16a20 20 0 0 1-40 0z" fill="#FFD66B"/>
+            <circle cx="32" cy="26" r="4.8" fill="#fff"/><circle cx="48" cy="26" r="4.8" fill="#fff"/>
+            <circle cx="32.5" cy="27" r="2.5" fill="#2B2B3A"/><circle cx="48.5" cy="27" r="2.5" fill="#2B2B3A"/>
+            <ellipse cx="25" cy="33" rx="3.5" ry="2.2" fill="#FF8FA3" opacity=".7"/><ellipse cx="55" cy="33" rx="3.5" ry="2.2" fill="#FF8FA3" opacity=".7"/>
+            <path d="M35 33 Q40 38 45 33" fill="none" stroke="#2B2B3A" stroke-width="2.4" stroke-linecap="round"/>
+            <rect x="36" y="47" width="8" height="12" fill="#F2B12E"/>
+            <rect x="24" y="58" width="32" height="12" rx="4" fill="#9B8CFF"/>
+            <path d="M66 6l1.8 3.8 4.2.6-3 2.9.7 4.1L66 15.4l-3.7 2 .7-4.1-3-2.9 4.2-.6z" fill="#FF8FA3"/>
+            <path d="M12 46l1.2 2.5 2.8.4-2 1.9.5 2.7-2.5-1.3-2.5 1.3.5-2.7-2-1.9 2.8-.4z" fill="#9BB5FF"/>
+          </svg>
+        </div>
+        <div><h2>頒獎典禮座位預約</h2><span class="tag">🔑 學校 Google 帳號</span></div>
+      </div>
       <p class="desc">各處室為頒獎典禮預約視聽教室座位、登記得獎者。</p>
-      <ul>
-        <li>依處室分色，拖曳選位</li>
+      <ul class="feat">
+        <li>依處室分色，拖曳選位、整批搬移</li>
         <li>Excel 匯入名單、列印通知單</li>
         <li>總覽模式可投影看全場</li>
       </ul>
-      <p class="login">登入：學校 Google 帳號 <b>@lsps.tp.edu.tw</b></p>
       <div class="acts">
-        <a class="go" href="https://pingking0220.github.io/award-seating/">進入座位預約 →</a>
+        <a class="go" href="https://pingking0220.github.io/award-seating/">進入座位預約 <span>→</span></a>
         <a class="help" href="https://pingking0220.github.io/award-seating/guide.html">使用說明</a>
       </div>
     </section>
 
-    <section class="card c-tt">
-      <div class="icon">📅</div>
-      <h2>課表查詢</h2>
+    <section class="card c3">
+      <div class="top">
+        <div class="pal" aria-hidden="true">
+          <svg viewBox="0 0 160 150">
+            <rect x="28" y="30" width="104" height="104" rx="26" fill="#FFD66B"/>
+            <rect x="28" y="30" width="104" height="34" rx="26" fill="#FF8F7A"/>
+            <rect x="28" y="48" width="104" height="16" fill="#FF8F7A"/>
+            <rect x="50" y="18" width="11" height="26" rx="5.5" fill="#5B6CFF"/><rect x="99" y="18" width="11" height="26" rx="5.5" fill="#5B6CFF"/>
+            <circle cx="62" cy="84" r="13" fill="#fff"/><circle cx="98" cy="84" r="13" fill="#fff"/>
+            <circle cx="63" cy="86" r="6.5" fill="#2B2B3A"/><circle cx="99" cy="86" r="6.5" fill="#2B2B3A"/>
+            <ellipse cx="47" cy="101" rx="7" ry="4.5" fill="#FF8FA3" opacity=".75"/><ellipse cx="113" cy="101" rx="7" ry="4.5" fill="#FF8FA3" opacity=".75"/>
+            <path d="M71 102 Q80 111 89 102" fill="none" stroke="#2B2B3A" stroke-width="4" stroke-linecap="round"/>
+            <rect x="44" y="116" width="15" height="9" rx="3" fill="#7ED7C1"/><rect x="63" y="116" width="15" height="9" rx="3" fill="#9BB5FF"/>
+            <rect x="82" y="116" width="15" height="9" rx="3" fill="#FFB38A"/><rect x="101" y="116" width="15" height="9" rx="3" fill="#C9A7FF"/>
+          </svg>
+        </div>
+        <div><h2>課表查詢</h2><span class="tag">🔒 校園帳號・限教職員</span></div>
+      </div>
       <p class="desc">查詢全校班級與老師課表；教學組、導師排課用。</p>
-      <ul>
-        <li>限本校教職員登入查詢</li>
+      <ul class="feat">
+        <li>用登入學校電腦的那組帳號</li>
         <li>導師可排自己班、自己任教的節次</li>
         <li>多人同時編輯，幾秒內同步</li>
       </ul>
-      <p class="login">登入：校園帳號（和登入學校電腦同一組）</p>
       <div class="acts">
-        <a class="go" href="https://schedule.class.synology.me/">進入課表系統 →</a>
+        <a class="go" href="https://schedule.class.synology.me/">進入課表系統 <span>→</span></a>
       </div>
     </section>
-  </div>
+  </main>
 
-  <div class="note">
-    💡 <b>小提醒</b>：請用 Chrome、Edge 或 Safari 開啟；從 LINE、Facebook 裡直接點連結會無法登入。<br>
-    「場地預約」和「頒獎典禮座位預約」用同一個學校 Google 帳號；「課表查詢」用校園帳號（和登入學校電腦同一組）。<br>
-    建議把這一頁加入書籤或手機主畫面，以後從這裡進入各系統。
+  <div class="tips">
+    <div class="tip"><span class="e">🌐</span><div><b>請用 Chrome、Edge 或 Safari 開啟</b><br>從 LINE、Facebook 裡直接點連結會無法登入。</div></div>
+    <div class="tip"><span class="e">🔑</span><div><b>兩種帳號別搞混</b><br>場地、座位用學校 Google 帳號；課表用登入學校電腦的校園帳號。</div></div>
+    <div class="tip"><span class="e">⭐</span><div><b>加入書籤或手機主畫面</b><br>以後從這一頁進入各系統最方便。</div></div>
   </div>
-</main>
+</div>
 
-<footer>系統問題請洽資訊組　<a href="mailto:it@lsps.tp.edu.tw">it@lsps.tp.edu.tw</a></footer>
+<footer>臺北市立力行國民小學　·　系統問題請洽資訊組 <a href="mailto:it@lsps.tp.edu.tw">it@lsps.tp.edu.tw</a></footer>
 </body>
 </html>
