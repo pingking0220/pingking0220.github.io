@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>力行國小行政服務</title>
-<meta name="description" content="力行國小行政服務入口：場地預約、頒獎典禮座位預約、課表查詢">
+<meta name="description" content="力行國小行政服務入口：場地預約、頒獎典禮座位預約、課表查詢、平板借還">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script>
@@ -45,7 +45,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;
   border:1px solid rgba(255,255,255,.95);border-radius:28px;padding:22px 22px 20px;
   box-shadow:0 20px 56px rgba(91,108,255,.13),0 3px 12px rgba(43,43,58,.05);
   transition:transform .25s cubic-bezier(.3,1.4,.5,1),box-shadow .25s;animation:rise .6s cubic-bezier(.2,.9,.3,1.2) both}
-.card:nth-child(2){animation-delay:.08s}.card:nth-child(3){animation-delay:.16s}
+.card:nth-child(2){animation-delay:.08s}.card:nth-child(3){animation-delay:.16s}.card:nth-child(4){animation-delay:.24s}
 .card:hover{transform:translateY(-6px);box-shadow:0 28px 70px rgba(91,108,255,.2),0 4px 14px rgba(43,43,58,.06)}
 .top{display:flex;align-items:center;gap:14px;margin-bottom:12px}
 .pal{width:76px;height:76px;border-radius:24px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -75,6 +75,8 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;
 .c2 .pal{background:#EEEBFF}.c2 .tag{background:#EEEBFF;color:#4B3BC4}
 .c3{--c:#FF8A4C;--g:linear-gradient(135deg,#FF8A4C,#FF6F8E 60%,#FF6FA0);--sh:rgba(255,111,142,.3)}
 .c3 .pal{background:#FFEEE3}.c3 .tag{background:#FFEEE3;color:#B44A10}
+.c4{--c:#2E8BFF;--g:linear-gradient(135deg,#2E7BFF,#3FA9FF 55%,#4FCFE6);--sh:rgba(46,123,255,.3)}
+.c4 .pal{background:#E3F0FF}.c4 .tag{background:#E3F0FF;color:#1B5FCC}
 
 /* 小提醒 */
 .tips{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
@@ -223,11 +225,40 @@ footer a{color:var(--soft)}
         <a class="go" href="https://schedule.class.synology.me/">進入課表系統 <span>→</span></a>
       </div>
     </section>
+
+    <section class="card c4">
+      <div class="top">
+        <div class="pal" aria-hidden="true">
+          <svg viewBox="0 0 80 80">
+            <rect x="18" y="6" width="44" height="62" rx="10" fill="#2E7BFF"/>
+            <rect x="23" y="12" width="34" height="46" rx="5" fill="#E9F4FF"/>
+            <circle cx="40" cy="63" r="2.4" fill="#BFDBFF"/>
+            <circle cx="33" cy="31" r="5" fill="#fff"/><circle cx="47" cy="31" r="5" fill="#fff"/>
+            <circle cx="33.5" cy="32" r="2.6" fill="#2B2B3A"/><circle cx="47.5" cy="32" r="2.6" fill="#2B2B3A"/>
+            <ellipse cx="28" cy="39" rx="3.5" ry="2.2" fill="#FF8FA3" opacity=".7"/><ellipse cx="52" cy="39" rx="3.5" ry="2.2" fill="#FF8FA3" opacity=".7"/>
+            <path d="M35 39 Q40 44 45 39" fill="none" stroke="#2B2B3A" stroke-width="2.4" stroke-linecap="round"/>
+            <g fill="#4FCFE6"><rect x="14" y="72" width="3" height="7" rx="1"/><rect x="20" y="72" width="2" height="7" rx="1"/><rect x="25" y="72" width="4" height="7" rx="1"/><rect x="32" y="72" width="2" height="7" rx="1"/><rect x="37" y="72" width="3" height="7" rx="1"/><rect x="43" y="72" width="2" height="7" rx="1"/><rect x="48" y="72" width="4" height="7" rx="1"/><rect x="55" y="72" width="2" height="7" rx="1"/><rect x="60" y="72" width="3" height="7" rx="1"/></g>
+            <path d="M66 10l1.6 3.4 3.7.5-2.7 2.6.6 3.7L66 18.4l-3.2 1.8.6-3.7-2.7-2.6 3.7-.5z" fill="#FFC94A"/>
+          </svg>
+        </div>
+        <div><h2>平板借還</h2><span class="tag">📱 平板車上的借還平板</span></div>
+      </div>
+      <p class="desc">借平板車的 iPad，不用再寫紙本借用簿。</p>
+      <ul class="feat">
+        <li>掃平板背面 QR Code，或直接點選編號</li>
+        <li>學生、老師用學校 Google 帳號登入</li>
+        <li>還平板掃一下就好，紀錄自動存檔</li>
+      </ul>
+      <div class="acts">
+        <a class="go" href="https://pingking0220.github.io/tablet-loan/guide.html">怎麼借還平板 <span>→</span></a>
+        <a class="help" href="https://pingking0220.github.io/tablet-loan/">借還站</a>
+      </div>
+    </section>
   </main>
 
   <div class="tips">
     <div class="tip"><span class="e">🌐</span><div><b>請用 Chrome、Edge 或 Safari 開啟</b><br>從 LINE、Facebook 裡直接點連結會無法登入。</div></div>
-    <div class="tip"><span class="e">🔑</span><div><b>兩種帳號別搞混</b><br>場地、座位用學校 Google 帳號；課表用登入學校電腦的校園帳號。</div></div>
+    <div class="tip"><span class="e">🔑</span><div><b>兩種帳號別搞混</b><br>場地、座位、平板借還用學校 Google 帳號；課表用登入學校電腦的校園帳號。</div></div>
     <div class="tip"><span class="e">⭐</span><div><b>加入書籤或手機主畫面</b><br>以後從這一頁進入各系統最方便。</div></div>
   </div>
 </div>
